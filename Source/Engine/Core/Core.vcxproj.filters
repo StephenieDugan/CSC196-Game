@@ -6,4 +6,16 @@
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fileIO.h" />
+    <ClInclude Include="Random.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="fileIO.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
