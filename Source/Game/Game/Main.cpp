@@ -1,9 +1,10 @@
 #include <iostream>
 #include <chrono>
+#include "Renderer\Renderer.h"
 #include "Core\Random.h"
 #include "Core\FileIO.h"
 #include "Core\Memory.h"
-
+#include "Core\Time.h"
 using namespace std;
 
 
@@ -15,13 +16,13 @@ int main() {
 	       delete p;
 	Twili::g_memoryTracker.Display();
 	
-	auto start = std::chrono::high_resolution_clock::now();
-	for(int i = 0; i < 10000000; i++) {}
+	Twili::Time timer;
+	for(int i = 0; i < 100000000; i++) {}
+	cout << timer.GetElapsedSeconds() << endl;
 
-	auto end = std::chrono::high_resolution_clock::now();
-	cout << (end - start).count() << endl;
+	
 
-
+	
 
 
 	/*
