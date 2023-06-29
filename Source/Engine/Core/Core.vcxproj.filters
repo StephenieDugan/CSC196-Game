@@ -7,14 +7,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fileIO.h" />
-    <ClInclude Include="Random.h" />
+    <ClInclude Include="Memory.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="fileIO.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fileIO.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
