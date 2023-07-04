@@ -10,6 +10,10 @@ using namespace std;
 
 int main() {
 
+	//Twili::CreateWindow("CSC196", 800, 600);
+	//cin.get(); //pause	
+	
+	
 	Twili::g_memoryTracker.Display();
 	int* p = new int;
 	Twili::g_memoryTracker.Display();

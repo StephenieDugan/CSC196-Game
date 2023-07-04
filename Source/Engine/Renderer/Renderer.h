@@ -1,6 +1,8 @@
 #pragma once
-class Renderer
+#include <string>
+namespace Twili
 {
+	void CreateWindow(const std::string& title, int width, int height);
 
-};
+}
 
