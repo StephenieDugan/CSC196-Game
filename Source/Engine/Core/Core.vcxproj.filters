@@ -19,6 +19,8 @@
     <ClInclude Include="Time.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Core.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fileIO.cpp">
