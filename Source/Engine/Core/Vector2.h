@@ -42,4 +42,6 @@ namespace Twili
 			return *this;
 		};
 	};
+
+	using vec2 = Vector2;
 }

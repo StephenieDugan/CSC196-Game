@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 			star.Update();
 
 			//star.m_pos.x + 1;
-			///star.m_pos.y += 0.3f;
+			star.m_pos.y += 0.3f;
 
 			if (star.m_pos.x >= renderer.getWidth()) star.m_pos.x = 0;
 			if (star.m_pos.y >= renderer.getHeight()) star.m_pos.y = 0;
