@@ -2,7 +2,7 @@
 
 namespace Twili
 {
-
+	Renderer g_rend;
 	bool Renderer::Init()
 	{
 		SDL_Init(SDL_INIT_VIDEO);

@@ -13,7 +13,9 @@ public:
 	Model() = default;
 	Model(const std::vector<vec2>& points) : m_points{ points } {};
 
-	void draw(Renderer& r);
+	bool Load(const std::string& fileName);
+	void draw(Renderer& r, const vec2& position, float rotation, float scale);
+	void draw(Renderer& r, const Transform& transform);
 
 
 private:

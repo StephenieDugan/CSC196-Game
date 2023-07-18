@@ -35,7 +35,7 @@ namespace Twili
 
 	};
 
-
+	extern Renderer g_rend;
 
 
 
