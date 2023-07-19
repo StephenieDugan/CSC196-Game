@@ -31,6 +31,7 @@
     <ClInclude Include="MathUtils.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fileIO.cpp">

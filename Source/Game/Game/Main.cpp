@@ -4,6 +4,7 @@
 #include "Renderer\Model.h"
 #include "Input\InputSystem.h"
 #include "Audio\AudioSystem.h"
+#include "Framework/Scene.h"
 #include "Core\Core.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -28,14 +29,21 @@ public:
 
 
 int main(int argc, char* argv[]) {
-	int m = Twili::Max(4.0f, 3.0f);
+
+	//std::unique_ptr<int> up = std::make_unique<int>(10);
+
+	Twili::MemoryTracker::Initialize();
+
+	//int m = Twili::Max(4.0f, 3.0f);
 	//int m = Twili::Max(4, 3);
 
 	//constexpr float a = Twili::degreesToRadians(180.0f);
 
-	Twili::seedRandom((unsigned) time(nullptr));
+	Twili::seedRandom((unsigned)time(nullptr));
 	Twili::setFilePath("assets");
 
+
+	//int* p = new int;
 	//Renderer
 	Twili::g_rend.Init();
 	Twili::g_rend.CreateWindow("CSC196", 800, 600);
@@ -62,21 +70,28 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < 1000; i++) {
 		Twili::Vector2 pos(Twili::Vector2(Twili::random(Twili::g_rend.getWidth()), Twili::random(Twili::g_rend.getHeight())));
 		Twili::Vector2 velocity(Twili::randomF(1, 4), 0.0f);
-		stars.push_back(Star(pos,velocity));
+		stars.push_back(Star(pos, velocity));
 
 	}
 
-	Twili::Transform transform{{400,300}, 0, 3};
+	Twili::Transform transform{{400, 300}, 0, 3};
 	Twili::vec2 position{400, 300};
 	constexpr float turnRate = Twili::degreesToRadians(180);
 	float speed = 150;
 
-	Player player{2, Twili::pi, { {400,300}, 0, 10 },model};
-	Enemy enemy{ 300, Twili::pi, {{400,300}, Twili::randomF(Twili::pi2), 6}, model };
+	Twili::Scene scene;
+
+	unique_ptr<Player> player = make_unique<Player>(200.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 6 }, model);
+	scene.Add(std::move(player));
+	
+	for (int i = 0; i < 5; i++)
+	{		unique_ptr<Enemy> enemy = make_unique<Enemy>(Twili::randomF(75.0f,150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 6 }, model);
+		scene.Add(std::move(enemy));
+	
+	}
+
+
 	//main game code
-
-
-
 		bool quit = false;
 	while (!quit)
 	{
@@ -87,7 +102,6 @@ int main(int argc, char* argv[]) {
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))
 		{
-
 			quit = true;
 		}
 
@@ -96,14 +110,13 @@ int main(int argc, char* argv[]) {
 			noise.PlayOneShot("Jump");
 		}
 
-		player.Update(Twili::g_time.getDeltaTime());
-		enemy.Update(Twili::g_time.getDeltaTime());
+		scene.Update(Twili::g_time.getDeltaTime());
 
 		Twili::vec2 direction;
 		
 		position += direction * speed * Twili::g_time.getDeltaTime();
 
-		Twili::g_rend.setColor(0, 0, 0, 0);
+		Twili::g_rend.setColor(0, 50, 0, 0);
 		Twili::g_rend.beginFrame();
 
 		//Twili::Vector2 vel(1.0f, 3.0f);
@@ -123,10 +136,11 @@ int main(int argc, char* argv[]) {
 			Twili::g_rend.drawPoint(star.m_pos.x,star.m_pos.y);
 
 		}
-		player.Draw(Twili::g_rend);
-		enemy.Draw(Twili::g_rend);
+		scene.Draw(Twili::g_rend);
 
-		model.draw(Twili::g_rend, transform.position,transform.rotation,transform.scale);
+		//model.draw(Twili::g_rend, transform.position,transform.rotation,transform.scale);
+
+
 
 		Twili::g_rend.EndFrame();
 
@@ -142,6 +156,7 @@ int main(int argc, char* argv[]) {
 		//this_thread::sleep_for(chrono::milliseconds(100));
 	}; //pause	
 	
+	scene.RemoveAll();
 	return 0;
 	/*Twili::g_memoryTracker.Display();
 	int* p = new int;

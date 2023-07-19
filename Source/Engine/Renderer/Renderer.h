@@ -18,7 +18,7 @@ namespace Twili
 		void beginFrame();
 		void EndFrame();
 
-		void setColor(int r, int g, int b, int a);
+		void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 		void drawLine(int x1, int y1, int x2, int y2);
 		void drawPoint(int x, int y);
 		void drawLine(float x1, float y1, float x2, float y2);

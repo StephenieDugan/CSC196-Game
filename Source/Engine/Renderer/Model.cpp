@@ -9,7 +9,7 @@ namespace Twili {
 		
 
 		std::istringstream stream(buffer);
-
+		stream >> m_color;
 		std::string line;
 		std::getline(stream, line);
 
@@ -25,6 +25,8 @@ namespace Twili {
 	void Model::draw(Renderer& r, const vec2& position,float rotation, float scale)
 	{
 		if (m_points.empty())return;
+
+		r.setColor(Color::toInt(m_color.r), Color::toInt(m_color.g), Color::toInt(m_color.b), Color::toInt(m_color.a));
 
 		for (int i = 0; i < m_points.size()-1; i++)
 		{

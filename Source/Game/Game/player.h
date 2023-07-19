@@ -1,6 +1,6 @@
 #pragma once
-#include "Actor.h"
-class Player : public Actor
+#include "FrameWork/Actor.h"
+class Player : public Twili::Actor
 {
 public:
 	Player(float speed, float turnRate, const Twili::Transform& transform, const Twili::Model& model) :
