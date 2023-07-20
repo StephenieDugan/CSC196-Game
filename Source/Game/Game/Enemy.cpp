@@ -26,9 +26,19 @@ void Enemy::Update(float dt)
 		m_fireTimer = m_fireRate;
 		Twili::Transform transform{ m_transform.position, m_transform.rotation};
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform, m_model);
+		weapon->m_tag = "EnemyFire";
 		m_scene->Add(std::move(weapon));
 		std::cout << "blep";
 
 	}
 
+}
+
+void Enemy::onCollision(Actor* other)
+{
+	if (other->m_tag == "PlayerFire" || other->m_tag == "Player")
+	{
+		m_health -= 5;
+	}
+	if(m_health <= 0) m_destroyed = true;
 }

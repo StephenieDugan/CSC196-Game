@@ -9,3 +9,8 @@ void Weapon::Update(float dt)
     m_transform.position.x = Twili::Wrap(m_transform.position.x, (float)Twili::g_rend.getWidth());
     m_transform.position.y = Twili::Wrap(m_transform.position.y, (float)Twili::g_rend.getHeight());
 }
+
+void Weapon::onCollision(Actor* other)
+{
+   
+}

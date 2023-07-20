@@ -9,12 +9,16 @@
   <ItemGroup>
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

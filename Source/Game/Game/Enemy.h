@@ -3,7 +3,7 @@
 class Enemy: public Twili::Actor
 {
 public:
-	Enemy(float speed, float turnRate, const Twili::Transform& transform, const Twili::Model& model) :
+	Enemy(float speed, float turnRate, const Twili::Transform& transform, std::shared_ptr<Twili::Model> model) :
 		Actor{ transform, model }, m_speed{ speed }, m_turnRate{ turnRate } 
 	{
 		m_fireRate = 2.0f;
@@ -11,7 +11,7 @@ public:
 	};
 
 	void Update(float dt) override;
-	
+	virtual void onCollision(Actor* actor) override;
 
 protected:
 	float m_speed = 0;
@@ -19,5 +19,6 @@ protected:
 
 	float m_fireRate = 0;
 	float m_fireTimer = 0;
+	float m_health = 10;
 };
 

@@ -25,10 +25,21 @@ void Player::Update(float dt)
 	{
 		Twili::Transform transform{ m_transform.position, m_transform.rotation};
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform, m_model );
+		weapon->m_tag = "PlayerFire";
 		m_scene->Add(std::move(weapon));
 	}
 
 
 
+}
+
+void Player::onCollision(Actor* other)
+{
+	if (other->m_tag == "EnemyFire" || other->m_tag == "Enemy")
+	{
+		std::cout << "boop";
+		m_health -= 50;
+	}
+	if (m_health <= 0) m_destroyed = true;
 }
 

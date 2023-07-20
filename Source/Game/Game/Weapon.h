@@ -5,7 +5,7 @@
 class Weapon : public Twili::Actor
 {
 public:
-    Weapon(float speed, const Twili::Transform& transform, const Twili::Model& model) :
+    Weapon(float speed, const Twili::Transform& transform, std::shared_ptr<Twili::Model> model) :
         Actor{ transform, model },
         m_speed{ speed }
     {
@@ -13,6 +13,7 @@ public:
     }
 
     void Update(float dt) override;
+    virtual void onCollision(Actor* actor) override;
 
 private:
     float m_speed = 0;

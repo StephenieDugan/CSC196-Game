@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include "Renderer\Renderer.h"
-#include "Renderer\Model.h"
+#include "Renderer\ModelManager.h"
 #include "Input\InputSystem.h"
 #include "Audio\AudioSystem.h"
 #include "Framework/Scene.h"
@@ -58,8 +58,8 @@ int main(int argc, char* argv[]) {
 	noise.AddAudio("Jump", "Jump.wav");
 
 	//std::vector<Twili::vec2> points{{0, 0}, { 50,0 }, { 0,50 }, { 0,0 }};
-	Twili::Model model;
-	model.Load("ship.txt");
+	
+
 
 	Twili::vec2 v{5, 5};
 	v.normalize();
@@ -81,12 +81,14 @@ int main(int argc, char* argv[]) {
 
 	Twili::Scene scene;
 
-	unique_ptr<Player> player = make_unique<Player>(200.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 6 }, model);
+	unique_ptr<Player> player = make_unique<Player>(200.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 6 }, Twili::g_MM.get("ship.txt"));
+	player->m_tag = "Player";
 	scene.Add(std::move(player));
 	
 	for (int i = 0; i < 5; i++)
-	{		unique_ptr<Enemy> enemy = make_unique<Enemy>(Twili::randomF(75.0f,150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 6 }, model);
-		scene.Add(std::move(enemy));
+	{		unique_ptr<Enemy> enemy = make_unique<Enemy>(Twili::randomF(75.0f,150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 6 }, Twili::g_MM.get("enemy.txt"));
+			enemy->m_tag = "Enemy";
+			scene.Add(std::move(enemy));
 	
 	}
 
