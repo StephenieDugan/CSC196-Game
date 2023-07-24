@@ -6,6 +6,8 @@
 #include "Audio\AudioSystem.h"
 #include "Framework/Scene.h"
 #include "Core\Core.h"
+#include "Renderer/Font.h"
+#include "Renderer/Text.h"
 #include "Player.h"
 #include "Enemy.h"
 #include <vector>
@@ -50,6 +52,11 @@ int main(int argc, char* argv[]) {
 
 	//Input System
 	Twili::g_inputSys.Initialize();
+
+	//Create Font/text Objects
+	std::shared_ptr<Twili::Font> font = std::make_shared<Twili::Font>("arcadeclassic.ttf", 24);
+	std::unique_ptr<Twili::Text> text = std::make_unique<Twili::Text>(font);
+	text->Create(Twili::g_rend, "NEUMONT", Twili::Color{ 1, 1, 1, 1 });
 
 	//Audio
 	Twili::AudioSystem noise;
@@ -122,6 +129,8 @@ int main(int argc, char* argv[]) {
 		Twili::g_rend.beginFrame();
 
 		//Twili::Vector2 vel(1.0f, 3.0f);
+
+		text->Draw(Twili::g_rend, 400, 300);
 
 		for (auto& star : stars)
 		{

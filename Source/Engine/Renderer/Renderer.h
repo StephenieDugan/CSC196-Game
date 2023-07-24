@@ -26,6 +26,8 @@ namespace Twili
 
 		int getWidth() const { return m_width; };
 		int getHeight() const { return m_height; };
+
+		friend class Text;
 	private:
 		int m_width = 0;
 		int m_height = 0;
