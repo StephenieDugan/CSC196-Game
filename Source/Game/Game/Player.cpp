@@ -3,6 +3,7 @@
 #include "Renderer/Renderer.h"
 #include "Game/Weapon.h"
 #include "Framework/Scene.h"
+#include "GAAAAME.h"
 void Player::Update(float dt)
 {
 	Actor::Update(dt);
@@ -35,11 +36,18 @@ void Player::Update(float dt)
 
 void Player::onCollision(Actor* other)
 {
-	if (other->m_tag == "EnemyFire" || other->m_tag == "Enemy")
+	if (other->m_tag == "EnemyFire" )
 	{
 		std::cout << "boop";
 		m_health -= 50;
+		if (m_health <= 0)
+		{
+			m_game->setLives(m_game->getLives() - 1);
+m_destroyed = true;
+			dynamic_cast<GAAAAME*>(m_game)->setState(GAAAAME::eState::PlayerDead);
+			
+		}
 	}
-	if (m_health <= 0) m_destroyed = true;
+	
 }
 

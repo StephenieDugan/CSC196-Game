@@ -10,6 +10,7 @@
 #include "Renderer/Text.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "GAAAAME.h"
 #include <vector>
 #include <thread>
 using namespace std;
@@ -32,42 +33,23 @@ public:
 
 int main(int argc, char* argv[]) {
 
-	//std::unique_ptr<int> up = std::make_unique<int>(10);
-
 	Twili::MemoryTracker::Initialize();
-
-	//int m = Twili::Max(4.0f, 3.0f);
-	//int m = Twili::Max(4, 3);
-
-	//constexpr float a = Twili::degreesToRadians(180.0f);
-
+	
 	Twili::seedRandom((unsigned)time(nullptr));
 	Twili::setFilePath("assets");
 
-
-	//int* p = new int;
-	//Renderer
 	Twili::g_rend.Init();
 	Twili::g_rend.CreateWindow("CSC196", 800, 600);
 
 	//Input System
 	Twili::g_inputSys.Initialize();
 
-	//Create Font/text Objects
-	std::shared_ptr<Twili::Font> font = std::make_shared<Twili::Font>("arcadeclassic.ttf", 24);
-	std::unique_ptr<Twili::Text> text = std::make_unique<Twili::Text>(font);
-	text->Create(Twili::g_rend, "NEUMONT", Twili::Color{ 1, 1, 1, 1 });
-
 	//Audio
-	Twili::AudioSystem noise;
-	noise.Initialize();
+	Twili::g_noise.Initialize();
 
-	noise.AddAudio("Jump", "Jump.wav");
-
-	//std::vector<Twili::vec2> points{{0, 0}, { 50,0 }, { 0,50 }, { 0,0 }};
+	unique_ptr<GAAAAME> game = make_unique<GAAAAME>();
+	game->Init();
 	
-
-
 	Twili::vec2 v{5, 5};
 	v.normalize();
 
@@ -86,19 +68,7 @@ int main(int argc, char* argv[]) {
 	constexpr float turnRate = Twili::degreesToRadians(180);
 	float speed = 150;
 
-	Twili::Scene scene;
-
-	unique_ptr<Player> player = make_unique<Player>(200.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 6 }, Twili::g_MM.get("ship.txt"));
-	player->m_tag = "Player";
-	scene.Add(std::move(player));
 	
-	for (int i = 0; i < 5; i++)
-	{		unique_ptr<Enemy> enemy = make_unique<Enemy>(Twili::randomF(75.0f,150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 6 }, Twili::g_MM.get("enemy.txt"));
-			enemy->m_tag = "Enemy";
-			scene.Add(std::move(enemy));
-	
-	}
-
 
 	//main game code
 		bool quit = false;
@@ -107,7 +77,7 @@ int main(int argc, char* argv[]) {
 		Twili::g_time.Tick();
 
 		Twili::g_inputSys.Update();
-		noise.Update();
+		Twili::g_noise.Update();
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))
 		{
@@ -116,10 +86,10 @@ int main(int argc, char* argv[]) {
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
-			noise.PlayOneShot("Jump");
+			Twili::g_noise.PlayOneShot("Jump");
 		}
 
-		scene.Update(Twili::g_time.getDeltaTime());
+	game->Update(Twili::g_time.getDeltaTime());
 
 		Twili::vec2 direction;
 		
@@ -130,7 +100,7 @@ int main(int argc, char* argv[]) {
 
 		//Twili::Vector2 vel(1.0f, 3.0f);
 
-		text->Draw(Twili::g_rend, 400, 300);
+		//text->Draw(Twili::g_rend, 400, 300);
 
 		for (auto& star : stars)
 		{
@@ -147,7 +117,7 @@ int main(int argc, char* argv[]) {
 			Twili::g_rend.drawPoint(star.m_pos.x,star.m_pos.y);
 
 		}
-		scene.Draw(Twili::g_rend);
+		game->Draw(Twili::g_rend);
 
 		//model.draw(Twili::g_rend, transform.position,transform.rotation,transform.scale);
 
@@ -167,7 +137,7 @@ int main(int argc, char* argv[]) {
 		//this_thread::sleep_for(chrono::milliseconds(100));
 	}; //pause	
 	
-	scene.RemoveAll();
+	
 	return 0;
 	/*Twili::g_memoryTracker.Display();
 	int* p = new int;

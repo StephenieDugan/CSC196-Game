@@ -3,6 +3,7 @@
 #include "player.h"
 #include "Weapon.h"
 #include "Renderer/Renderer.h"
+#include "GAAAAME.h"
 void Enemy::Update(float dt)
 {
 	Actor::Update(dt);
@@ -36,9 +37,12 @@ void Enemy::Update(float dt)
 
 void Enemy::onCollision(Actor* other)
 {
-	if (other->m_tag == "PlayerFire" || other->m_tag == "Player")
+	if (other->m_tag == "PlayerFire")
 	{
+		std::cout << "Blip";
+		
 		m_health -= 5;
+		if (m_health <= 0) { m_game->AddPoints(100); m_destroyed = true; }
 	}
-	if(m_health <= 0) m_destroyed = true;
+	
 }

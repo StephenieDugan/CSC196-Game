@@ -19,6 +19,9 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GAAAAME.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -26,5 +29,8 @@
     </ClInclude>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="GAAAAME.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

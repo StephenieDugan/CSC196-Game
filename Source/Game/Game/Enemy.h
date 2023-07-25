@@ -19,6 +19,6 @@ protected:
 
 	float m_fireRate = 0;
 	float m_fireTimer = 0;
-	float m_health = 10;
+	float m_health = 10.0f;
 };
 
