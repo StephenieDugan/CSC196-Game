@@ -45,7 +45,7 @@ namespace Twili {
 
 	float Model::getRadius()
 	{
-		if (!m_radius) return m_radius;
+		if (m_radius) return m_radius;
 
 		for (auto point : m_points)
 		{

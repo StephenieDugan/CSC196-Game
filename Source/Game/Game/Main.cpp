@@ -24,6 +24,10 @@ public:
 		if (m_pos.x >= width) m_pos.x = 0;
 		if (m_pos.y >= height) m_pos.y = 0;
 	}
+	void Draw(Twili::Renderer& renderer)
+	{
+		renderer.drawPoint(m_pos.x, m_pos.y);
+	}
 public:
 	Twili::Vector2 m_pos;
 	Twili::Vector2 velocity;
@@ -58,7 +62,7 @@ int main(int argc, char* argv[]) {
 	vector<Star> stars;
 	for (int i = 0; i < 1000; i++) {
 		Twili::Vector2 pos(Twili::Vector2(Twili::random(Twili::g_rend.getWidth()), Twili::random(Twili::g_rend.getHeight())));
-		Twili::Vector2 velocity(Twili::randomF(1, 4), 0.0f);
+		Twili::Vector2 velocity(Twili::randomF(100, 400), 0.0f);
 		stars.push_back(Star(pos, velocity));
 
 	}
@@ -78,6 +82,7 @@ int main(int argc, char* argv[]) {
 
 		Twili::g_inputSys.Update();
 		Twili::g_noise.Update();
+		
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))
 		{
@@ -95,7 +100,7 @@ int main(int argc, char* argv[]) {
 		
 		position += direction * speed * Twili::g_time.getDeltaTime();
 
-		Twili::g_rend.setColor(0, 50, 0, 0);
+		Twili::g_rend.setColor(0, 0, 0, 0);
 		Twili::g_rend.beginFrame();
 
 		//Twili::Vector2 vel(1.0f, 3.0f);
@@ -122,9 +127,9 @@ int main(int argc, char* argv[]) {
 		//model.draw(Twili::g_rend, transform.position,transform.rotation,transform.scale);
 
 
-
 		Twili::g_rend.EndFrame();
 
+		
 		//for(int i = 0; i<1001;i++)
 		//{
 		//renderer.setColor(Twili::random(256), Twili::random(256), Twili::random(256), 255);//draw

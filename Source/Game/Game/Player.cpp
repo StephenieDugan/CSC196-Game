@@ -24,26 +24,23 @@ void Player::Update(float dt)
 	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
 		!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 	{
-		Twili::Transform transform{ m_transform.position, m_transform.rotation};
+		Twili::Transform transform{ m_transform.position, m_transform.rotation,1};
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform, m_model );
 		weapon->m_tag = "PlayerFire";
 		m_scene->Add(std::move(weapon));
 	}
-
-
-
 }
 
 void Player::onCollision(Actor* other)
 {
-	if (other->m_tag == "EnemyFire" )
+	if (other->m_tag != "PlayerFire" )
 	{
 		std::cout << "boop";
-		m_health -= 50;
+		m_health -= 10;
 		if (m_health <= 0)
 		{
 			m_game->setLives(m_game->getLives() - 1);
-m_destroyed = true;
+			m_destroyed = true;
 			dynamic_cast<GAAAAME*>(m_game)->setState(GAAAAME::eState::PlayerDead);
 			
 		}

@@ -18,15 +18,18 @@ bool GAAAAME::Init()
     m_Scoretext = std::make_unique<Twili::Text>(font);
     m_Scoretext->Create(Twili::g_rend, "Score 0000", Twili::Color{ 1, 0, 1, 1 });
 
+    m_Healthtext = std::make_unique<Twili::Text>(font);
+    m_Healthtext->Create(Twili::g_rend, "Health: 100", Twili::Color{ 1, 0, 1, 1 });
+
     m_Titletext = std::make_unique<Twili::Text>(font);
-    m_Scoretext->Create(Twili::g_rend, "Asteroids", Twili::Color{ 1, 0, 1, 1 });
+    m_Titletext->Create(Twili::g_rend, "Asteroids", Twili::Color{ 1, 1, 1, 1 });
 
     Twili::g_noise.AddAudio("Jump", "Jump.wav");
 
 
     m_scene = std::make_unique<Twili::Scene>();
 
-	return false;
+	return true;
 }
 
 void GAAAAME::ShutDown()
@@ -38,6 +41,7 @@ void GAAAAME::Update(float dt)
 	switch (m_state)
     {
     case GAAAAME::eState::Title:
+      
         if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE))
         {
             m_state = eState::StartGame;
@@ -57,6 +61,7 @@ void GAAAAME::Update(float dt)
         player->m_game = this;
         m_scene->Add(std::move(player));
     }
+    m_state = eState::Game;
         break;
     case GAAAAME::eState::Game:
 
@@ -97,5 +102,6 @@ void GAAAAME::Draw(Twili::Renderer& r)
     }
 
     m_Scoretext->Draw(r, 40, 20);
+    m_Healthtext->Draw(r, 80, 40);
     m_scene->Draw(r);
 }

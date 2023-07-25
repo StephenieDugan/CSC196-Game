@@ -3,6 +3,9 @@
 
 namespace Twili
 {
+	class Scene;
+	class Renderer;
+
 	class Game
 	{
 	public:
@@ -13,7 +16,7 @@ namespace Twili
 		virtual void ShutDown() = 0;
 
 		virtual void Update(float dt) = 0;
-		virtual void Draw(class Renderer& r) = 0;
+		virtual void Draw(Renderer& r) = 0;
 
 		int getScore() const { return m_score; };
 		void AddPoints(int points) { m_score += points; };
@@ -22,7 +25,7 @@ namespace Twili
 
 
 	protected:
-		std::unique_ptr<class Scene> m_scene;
+		std::unique_ptr<Scene> m_scene;
 
 		int m_score = 0;
 		int m_lives = 0;

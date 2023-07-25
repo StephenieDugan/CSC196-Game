@@ -23,12 +23,13 @@ public:
 
 	virtual void Update(float dt) override;
 	virtual void Draw(Twili::Renderer& r) override;
-	void setState(eState state) { m_state = state; };
+	void setState(eState state) { m_state = state; }
 
 private:
 	eState m_state = eState::Title;
 	std::shared_ptr<Twili::Font> font;
 	std::unique_ptr<Twili::Text> m_Scoretext;
+	std::unique_ptr<Twili::Text> m_Healthtext;
 	std::unique_ptr<Twili::Text> m_Titletext;
 	float m_spawn_timer = 0;
 	float m_spawnTime = 3;

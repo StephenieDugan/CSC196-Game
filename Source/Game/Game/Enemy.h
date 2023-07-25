@@ -8,10 +8,10 @@ public:
 	{
 		m_fireRate = 2.0f;
 		m_fireTimer = m_fireRate;
-	};
+	}
 
 	void Update(float dt) override;
-	virtual void onCollision(Actor* actor) override;
+	void onCollision(Actor* actor) override;
 
 protected:
 	float m_speed = 0;

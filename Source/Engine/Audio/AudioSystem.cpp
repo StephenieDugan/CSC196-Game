@@ -1,6 +1,7 @@
 #include "AudioSystem.h"
 namespace Twili
 {
+	AudioSystem g_noise;
 	bool AudioSystem::Initialize()
 	{
 		FMOD::System_Create(&m_fmodSystem);
