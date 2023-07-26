@@ -5,9 +5,11 @@
 #include "Input\InputSystem.h"
 #include "Audio\AudioSystem.h"
 #include "Framework/Scene.h"
+#include "FrameWork/Emitter.h"
 #include "Core\Core.h"
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
+#include "Renderer/ParticleSystem.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "GAAAAME.h"
@@ -82,6 +84,7 @@ int main(int argc, char* argv[]) {
 
 		Twili::g_inputSys.Update();
 		Twili::g_noise.Update();
+		Twili::g_ParSys.Update(Twili::g_time.getDeltaTime());
 		
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))
@@ -92,6 +95,12 @@ int main(int argc, char* argv[]) {
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
 			Twili::g_noise.PlayOneShot("Jump");
+		}
+
+		if (Twili::g_inputSys.GetKeyDown(0))
+		{
+			Twili::Emitter boom;
+			boom.Update(Twili::g_time.getDeltaTime());
 		}
 
 	game->Update(Twili::g_time.getDeltaTime());

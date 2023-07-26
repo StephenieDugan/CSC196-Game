@@ -14,6 +14,8 @@
     <ClInclude Include="Text.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -29,6 +31,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
