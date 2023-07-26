@@ -94,10 +94,10 @@ int main(int argc, char* argv[]) {
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
-			Twili::g_noise.PlayOneShot("Jump");
+			Twili::g_noise.PlayOneShot("Jump", false);
 		}
 
-		if (Twili::g_inputSys.GetKeyDown(0))
+		if (Twili::g_inputSys.GetMouseButtonDown(0))
 		{
 			Twili::EmitterData data;
 			data.burst = true;
@@ -110,14 +110,14 @@ int main(int argc, char* argv[]) {
 			data.speedMin = 50;
 			data.speedMax = 250;
 			data.damping = 0.5f;
-			data.color = Twili::Color{ 1, 0, 0, 1 };
+			data.color = Twili::Color{ 1, 1, 0, 1 };
 			Twili::Transform transform{ { Twili::g_inputSys.GetMousePosition() }, 0, 1 };
 			auto emitter = std::make_unique<Twili::Emitter>(transform, data);
 			emitter->m_lifespan = 1.0f;
 			game->m_scene->Add(std::move(emitter));
 		}
 
-	game->Update(Twili::g_time.getDeltaTime());
+		game->Update(Twili::g_time.getDeltaTime());
 
 		Twili::vec2 direction;
 		
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]) {
 
 		}
 		game->Draw(Twili::g_rend);
-
+		Twili::g_ParticleSystem.Draw(Twili::g_rend);
 		//model.draw(Twili::g_rend, transform.position,transform.rotation,transform.scale);
 
 

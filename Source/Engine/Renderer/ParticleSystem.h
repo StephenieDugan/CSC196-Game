@@ -7,7 +7,7 @@ class ParticleSystem
 {
 public:
 	ParticleSystem() = default;
-	ParticleSystem(int maxCount = 20)
+	ParticleSystem(int maxCount)
 	{
 		m_particles.resize(maxCount);
 	}

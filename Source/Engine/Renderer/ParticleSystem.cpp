@@ -2,7 +2,7 @@
 
 namespace Twili
 {
-	ParticleSystem g_ParticleSystem;
+	ParticleSystem g_ParticleSystem(1000);
 
 	void ParticleSystem::Update(float dt)
 	{

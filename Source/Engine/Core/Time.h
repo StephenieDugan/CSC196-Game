@@ -23,11 +23,16 @@ namespace Twili
 		clock_rep GetElapsedMilliseconds();
 		float GetElapsedSeconds();
 		float getTime()const { return m_time; };
-		float getDeltaTime() const { return m_deltaTime; };
-	private:
-		float m_time;
-		float m_deltaTime;
+		float getDeltaTime() const { return m_deltaTime * m_timeScale; };
+		float getUnscaledDeltaTime() const { return m_deltaTime; };
 
+		float getTimeScale() const { return m_timeScale; };
+		void setTimeScale(float time) { m_timeScale = time; };
+
+	private:
+		float m_time =0;
+		float m_deltaTime =0;
+		float m_timeScale = 1;
 
 		clock::time_point m_startTime;
 		clock::time_point m_frameTime;

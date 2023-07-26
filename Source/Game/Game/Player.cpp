@@ -17,18 +17,33 @@ void Player::Update(float dt)
 	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_W)) thrust = 1;
 
 	Twili::Vector2 forward = Twili::vec2(0, -1).Rotate(m_transform.rotation);
-	m_transform.position += forward * m_speed * thrust * Twili::g_time.getDeltaTime();
+
+	addForce(forward * m_speed * thrust);
+
+	//m_transform.position += forward * m_speed * thrust * Twili::g_time.getDeltaTime();
+
 	m_transform.position.x = Twili::Wrap(m_transform.position.x, (float)Twili::g_rend.getWidth());
 	m_transform.position.y = Twili::Wrap(m_transform.position.y, (float)Twili::g_rend.getHeight());
 
 	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
 		!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 	{
-		Twili::Transform transform{ m_transform.position, m_transform.rotation,1};
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform, m_model );
+		Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f),1};
+		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform1, m_model );
+		weapon->m_tag = "PlayerFire";
+		m_scene->Add(std::move(weapon));
+
+		Twili::Transform transform2{ m_transform.position, m_transform.rotation - Twili::degreesToRadians(10.0f),1};
+		weapon = std::make_unique<Weapon>(400.0f, transform2, m_model);
 		weapon->m_tag = "PlayerFire";
 		m_scene->Add(std::move(weapon));
 	}
+
+	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE)) Twili::g_time.setTimeScale(0.3f);
+	else Twili::g_time.setTimeScale(1.0f);
+
+
+
 }
 
 void Player::onCollision(Actor* other)
@@ -41,7 +56,7 @@ void Player::onCollision(Actor* other)
 		{
 			m_game->setLives(m_game->getLives() - 1);
 			m_destroyed = true;
-			dynamic_cast<GAAAAME*>(m_game)->setState(GAAAAME::eState::PlayerDead);
+			dynamic_cast<GAAAAME*>(m_game)->setState(GAAAAME::eState::PlayerDeadStart);
 			
 		}
 	}

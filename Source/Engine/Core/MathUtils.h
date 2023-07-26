@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include <utility>
 
 using namespace std;
 namespace Twili
@@ -40,7 +41,7 @@ namespace Twili
 	template <typename T>
 	inline T Clamp(T value, T min, T max)
 	{
-		//if (min > max) std::swap(min, max);
+		if (min > max) std::swap(min, max);
 		if (value < min) value = min;
 		else if (value > max) value = max;
 
@@ -48,6 +49,10 @@ namespace Twili
 		//(value < min) ? min : (value > max)? max : value; same thing as above.
 	}
 
-
+	template<typename T>
+	constexpr T Lerp(const T& a, const T& b, float t)
+	{
+		return (a * (1.0f - t)) + (b * t);
+	}
 
 }
