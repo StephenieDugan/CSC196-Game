@@ -24,6 +24,7 @@ namespace Twili
 		void setLives(int lives) { m_lives = lives; };
 
 		std::unique_ptr<Scene> m_scene;
+
 	protected:
 		
 

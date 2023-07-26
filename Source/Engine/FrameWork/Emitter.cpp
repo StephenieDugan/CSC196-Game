@@ -35,7 +35,7 @@ namespace Twili
 
 	void Emitter::Emit()
 	{
-		Particle* particle = g_ParSys.GetFreeParticle();
+		Particle* particle = g_ParticleSystem.GetFreeParticle();
 		if (particle)
 		{
 			ParticleData data;

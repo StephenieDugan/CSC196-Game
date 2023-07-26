@@ -33,7 +33,7 @@ void Player::Update(float dt)
 
 void Player::onCollision(Actor* other)
 {
-	if (other->m_tag != "PlayerFire" )
+	if (other->m_tag == "EnemyFire" )
 	{
 		std::cout << "boop";
 		m_health -= 10;

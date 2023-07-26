@@ -40,7 +40,7 @@ namespace Twili
 	template <typename T>
 	inline T Clamp(T value, T min, T max)
 	{
-		if (min > max) std::swap(min, max);
+		//if (min > max) std::swap(min, max);
 		if (value < min) value = min;
 		else if (value > max) value = max;
 

@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
 
 		Twili::g_inputSys.Update();
 		Twili::g_noise.Update();
-		Twili::g_ParSys.Update(Twili::g_time.getDeltaTime());
+		Twili::g_ParticleSystem.Update(Twili::g_time.getDeltaTime());
 		
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))

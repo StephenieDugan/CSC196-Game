@@ -18,7 +18,7 @@ private:
 	std::vector<Particle> m_particles;
 };
 
-extern ParticleSystem g_ParSys;
+extern ParticleSystem g_ParticleSystem;
 
 }
 
