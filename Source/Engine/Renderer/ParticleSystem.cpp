@@ -3,6 +3,7 @@
 namespace Twili
 {
 	ParticleSystem g_ParSys;
+
 	void ParticleSystem::Update(float dt)
 	{
 		for (auto& particle : m_particles)

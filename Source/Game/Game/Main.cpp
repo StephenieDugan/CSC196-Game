@@ -99,8 +99,22 @@ int main(int argc, char* argv[]) {
 
 		if (Twili::g_inputSys.GetKeyDown(0))
 		{
-			Twili::Emitter boom;
-			boom.Update(Twili::g_time.getDeltaTime());
+			Twili::EmitterData data;
+			data.burst = true;
+			data.burstCount = 100;
+			data.spawnRate = 200;
+			data.angle = 0;
+			data.angleRange = Twili::pi;
+			data.lifetimeMin = 0.5f;
+			data.lifetimeMin = 1.5f;
+			data.speedMin = 50;
+			data.speedMax = 250;
+			data.damping = 0.5f;
+			data.color = Twili::Color{ 1, 0, 0, 1 };
+			Twili::Transform transform{ { Twili::g_inputSys.GetMousePosition() }, 0, 1 };
+			auto emitter = std::make_unique<Twili::Emitter>(transform, data);
+			emitter->m_lifespan = 1.0f;
+			game->m_scene->Add(std::move(emitter));
 		}
 
 	game->Update(Twili::g_time.getDeltaTime());

@@ -23,9 +23,9 @@ namespace Twili
 		int getLives() const { return m_lives; };
 		void setLives(int lives) { m_lives = lives; };
 
-
-	protected:
 		std::unique_ptr<Scene> m_scene;
+	protected:
+		
 
 		int m_score = 0;
 		int m_lives = 0;

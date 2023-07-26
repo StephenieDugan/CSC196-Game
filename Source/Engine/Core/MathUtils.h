@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 
+using namespace std;
 namespace Twili
 {
 	constexpr float pi = 3.1415926535897932384626433f;
