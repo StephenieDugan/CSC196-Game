@@ -39,8 +39,7 @@ void Player::Update(float dt)
 
 	if (m_transform.scale == 5 || m_transform.scale == 4)
 	{
-		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
-			!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
+		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) && !Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE) && m_tag == "Player")
 		{
 			Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f), 1};
 			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1, m_model);
@@ -76,11 +75,11 @@ void Player::onCollision(Actor* other)
 		}
 	}
 
-	/*if (other->m_tag == "PowerUp")
+	if (other->m_tag == "PowerUp")
 	{
-		m_transform.scale -= 1;
-		m_scene->Remove(other);
-	}*/
+		m_transform.scale = 5;
+		other->m_destroyed = true;
+	}
 	
 }
 

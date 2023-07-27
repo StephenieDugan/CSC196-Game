@@ -83,7 +83,7 @@ void GAAAAME::Update(float dt)
             enemy->m_game = this;
             m_scene->Add(std::move(enemy));
         }
-        if (m_score >= 600)
+        if (m_score >= 00)
         {
             m_state = eState::Level2;
         }
@@ -91,17 +91,17 @@ void GAAAAME::Update(float dt)
     case GAAAAME::eState::Level2:
     {
         m_spawn_timer += dt;
-       /* for (int i = 0; i < 1; i++) {
-            float UpgradePopUp = Twili::randomF(0.0f, 2.0f);
+        for (int i = 0; i < 1; i++) {
+            float UpgradePopUp = Twili::randomF(2.0f, 4.0f);
             UpgradePopUp -= dt;
             if (UpgradePopUp <= 0)
             {
-                std::unique_ptr<Player> powerup = std::make_unique<Player>(0.0f, 0, Twili::Transform{ {Twili::random(Twili::g_rend.getWidth()), Twili::random(Twili::g_rend.getHeight())}, 0, 5 }, Twili::g_MM.get("WeaponUpgrade.txt"));
+                std::unique_ptr<Player> powerup = std::make_unique<Player>(0.0f, 0, Twili::Transform{ {Twili::random(Twili::g_rend.getWidth()), Twili::random(Twili::g_rend.getHeight())}, 0, 3}, Twili::g_MM.get("WeaponUpgrade.txt"));
                 powerup->m_tag = "PowerUp";
                 powerup->m_game = this;
                 m_scene->Add(std::move(powerup));
             }
-        }*/
+        }
 
 
         if (m_spawn_timer >= m_spawnTime)
@@ -126,7 +126,7 @@ void GAAAAME::Update(float dt)
     }
         break;
     case GAAAAME::eState::Level3:
-        Twili::g_rend.setColor(88, 24, 31, 1);
+        Twili::g_rend.setColor(176, 48, 62, 1);
         m_spawnTime = 4;
         m_spawn_timer += dt;
         if (m_spawn_timer >= m_spawnTime)
@@ -140,7 +140,7 @@ void GAAAAME::Update(float dt)
                 m_scene->Add(std::move(enemy));
             }
             for (int i = 0; i < 4; i++) {
-                std::unique_ptr<Enemy> enemy2 = std::make_unique<Enemy>(Twili::randomF(70.0f, 150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 13 }, Twili::g_MM.get("enemy2.txt"));
+                std::unique_ptr<Enemy> enemy2 = std::make_unique<Enemy>(Twili::randomF(70.0f, 150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 12 }, Twili::g_MM.get("enemy2.txt"));
                 enemy2->m_tag = "Enemy2";
                 enemy2->m_health = 80.0f;
                 enemy2->m_game = this;
@@ -149,7 +149,7 @@ void GAAAAME::Update(float dt)
             }
             std::unique_ptr<Enemy> enemy3 = std::make_unique<Enemy>(Twili::randomF(35.0f, 95.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 16 }, Twili::g_MM.get("enemy2.txt"));
             enemy3->m_tag = "Enemy3";
-            enemy3->m_health = 110.0f;
+            enemy3->m_health = 130.0f;
             enemy3->m_game = this;
             m_scene->Add(std::move(enemy3));
         }
@@ -164,10 +164,26 @@ void GAAAAME::Update(float dt)
         if (m_spawn_timer >= m_spawnTime)
         {
             m_spawn_timer = 0;
-            std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(Twili::randomF(75.0f, 150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 6 }, Twili::g_MM.get("enemy.txt"));
-            enemy->m_tag = "Enemy";
-            enemy->m_game = this;
-            m_scene->Add(std::move(enemy));
+
+            for (int i = 0; i < 4; i++) {
+                std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(Twili::randomF(80.0f, 160.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 5 }, Twili::g_MM.get("enemy.txt"));
+                enemy->m_tag = "Enemy";
+                enemy->m_game = this;
+                m_scene->Add(std::move(enemy));
+            }
+            for (int i = 0; i < 4; i++) {
+                std::unique_ptr<Enemy> enemy2 = std::make_unique<Enemy>(Twili::randomF(70.0f, 150.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 13 }, Twili::g_MM.get("enemy2.txt"));
+                enemy2->m_tag = "Enemy2";
+                enemy2->m_health = 100.0f;
+                enemy2->m_game = this;
+
+                m_scene->Add(std::move(enemy2));
+            }
+            std::unique_ptr<Enemy> enemy3 = std::make_unique<Enemy>(Twili::randomF(35.0f, 95.0f), Twili::pi, Twili::Transform{ {400, 300}, Twili::randomF(Twili::pi2), 16 }, Twili::g_MM.get("enemy2.txt"));
+            enemy3->m_tag = "Enemy3";
+            enemy3->m_health = 160.0f;
+            enemy3->m_game = this;
+            m_scene->Add(std::move(enemy3));
         }
         if (m_score >= 4800)
         {
