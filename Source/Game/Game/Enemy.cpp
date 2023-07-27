@@ -2,9 +2,11 @@
 #include "FrameWork/Scene.h"
 #include "player.h"
 #include "Weapon.h"
+#include "Renderer/ModelManager.h"
 #include "Renderer/Renderer.h"
 #include "GAAAAME.h"
 #include <FrameWork/Emitter.h>
+#include <memory>
 void Enemy::Update(float dt)
 {
 	Twili::Vector2 forward = Twili::vec2{0, -1}.Rotate(m_transform.rotation);
@@ -18,8 +20,7 @@ void Enemy::Update(float dt)
 		float turnAngle = Twili::vec2::SignedAngle(forward, direction.normalized());
 		m_transform.rotation += turnAngle * dt;
 
-		float angle = Twili::vec2::Angle(forward, direction.normalized());
-		if (angle < Twili::degreesToRadians(30.0f))
+		if (std::fabs(turnAngle) < Twili::degreesToRadians(30.0f))
 		{
 			//i see you 
 		}
@@ -51,7 +52,34 @@ void Enemy::onCollision(Actor* other)
 	{
 		std::cout << "Blip";
 		m_health -= 5;
-		if (m_health <= 0) { m_game->AddPoints(100); m_destroyed = true; }
+		if (m_health <= 0) {
+			
+				
+			if (this->m_tag == "Enemy2")
+			{
+				m_game->AddPoints(200); m_destroyed = true;
+			}
+			else if (this->m_tag == "Enemy3")
+			{
+				m_game->AddPoints(300); m_destroyed = true;
+			}
+			else if (this->m_tag == "Enemy4")
+			{
+				m_game->AddPoints(300); m_destroyed = true;
+
+				std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 4 }, Twili::g_MM.get("ship.txt"));
+				player->m_tag = "Player";
+				player->m_game = m_game;
+				player->setDamping(0.9f);
+				m_scene->Add(std::move(player));
+			}
+			
+			else 
+			{ 
+				m_game->AddPoints(100); 
+				m_destroyed = true; 
+			}
+		}
 
 		Twili::EmitterData data;
 		data.burst = true;

@@ -25,18 +25,33 @@ void Player::Update(float dt)
 	m_transform.position.x = Twili::Wrap(m_transform.position.x, (float)Twili::g_rend.getWidth());
 	m_transform.position.y = Twili::Wrap(m_transform.position.y, (float)Twili::g_rend.getHeight());
 
-	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
-		!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
+	if (m_transform.scale == 6)
 	{
-		Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f),1};
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, transform1, m_model );
-		weapon->m_tag = "PlayerFire";
-		m_scene->Add(std::move(weapon));
+		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
+			!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
+		{
+			Twili::Transform transform1{ m_transform.position, m_transform.rotation, 1};
+			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+		}
+	}
 
-		Twili::Transform transform2{ m_transform.position, m_transform.rotation - Twili::degreesToRadians(10.0f),1};
-		weapon = std::make_unique<Weapon>(400.0f, transform2, m_model);
-		weapon->m_tag = "PlayerFire";
-		m_scene->Add(std::move(weapon));
+	if (m_transform.scale == 5 || m_transform.scale == 4)
+	{
+		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) &&
+			!Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
+		{
+			Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f), 1};
+			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+
+			Twili::Transform transform2{ m_transform.position, m_transform.rotation - Twili::degreesToRadians(10.0f), 1};
+			weapon = std::make_unique<Weapon>(400.0f, transform2, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+		}
 	}
 
 	if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE)) Twili::g_time.setTimeScale(0.3f);
@@ -59,6 +74,12 @@ void Player::onCollision(Actor* other)
 			dynamic_cast<GAAAAME*>(m_game)->setState(GAAAAME::eState::PlayerDeadStart);
 			
 		}
+	}
+
+	if (other->m_tag == "PowerUp")
+	{
+		m_transform.scale -= 1;
+		m_scene->Remove(other);
 	}
 	
 }

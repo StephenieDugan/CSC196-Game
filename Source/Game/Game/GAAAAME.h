@@ -11,11 +11,17 @@ public:
 		Title,
 		StartGame,
 		StartLevel,
-		Game,
+		Level1,
+		Level2,
+		Level3,
+		Level4,
+		Level5,
 		PlayerDeadStart,
 		PlayerDead,
 		GameOverStart,
-		GameOver
+		GameOver,
+		WinnerStart,
+		Winner
 	};
 
 
@@ -30,11 +36,13 @@ public:
 private:
 	eState m_state = eState::Title;
 	std::shared_ptr<Twili::Font> font;
+	std::shared_ptr<Twili::Font> font2;
 	std::unique_ptr<Twili::Text> m_Scoretext;
 	std::unique_ptr<Twili::Text> m_Livestext;
 	std::unique_ptr<Twili::Text> m_Healthtext;
 	std::unique_ptr<Twili::Text> m_Titletext;
 	std::unique_ptr<Twili::Text> m_GOvertext;
+	std::unique_ptr<Twili::Text> m_Winnertext;
 	float m_spawn_timer = 0;
 	float m_spawnTime = 3;
 
