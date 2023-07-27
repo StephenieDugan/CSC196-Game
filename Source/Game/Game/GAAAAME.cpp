@@ -91,7 +91,7 @@ void GAAAAME::Update(float dt)
     case GAAAAME::eState::Level2:
     {
         m_spawn_timer += dt;
-        for (int i = 0; i < 1; i++) {
+       /* for (int i = 0; i < 1; i++) {
             float UpgradePopUp = Twili::randomF(0.0f, 2.0f);
             UpgradePopUp -= dt;
             if (UpgradePopUp <= 0)
@@ -101,10 +101,10 @@ void GAAAAME::Update(float dt)
                 powerup->m_game = this;
                 m_scene->Add(std::move(powerup));
             }
-        }
+        }*/
 
 
-       /* if (m_spawn_timer >= m_spawnTime)
+        if (m_spawn_timer >= m_spawnTime)
         {
             m_spawn_timer = 0;
             for (int i = 0; i < 2; i++) {
@@ -118,7 +118,7 @@ void GAAAAME::Update(float dt)
             enemy2->m_health = 50.0f;
             enemy2->m_game = this;
             m_scene->Add(std::move(enemy2));
-        }*/
+        }
         if (m_score >= 1200)
         {
             m_state = eState::Level3;

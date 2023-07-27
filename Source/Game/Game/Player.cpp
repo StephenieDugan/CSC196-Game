@@ -76,11 +76,11 @@ void Player::onCollision(Actor* other)
 		}
 	}
 
-	if (other->m_tag == "PowerUp")
+	/*if (other->m_tag == "PowerUp")
 	{
 		m_transform.scale -= 1;
 		m_scene->Remove(other);
-	}
+	}*/
 	
 }
 
