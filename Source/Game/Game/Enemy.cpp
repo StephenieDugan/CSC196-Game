@@ -3,6 +3,7 @@
 #include "player.h"
 #include "Weapon.h"
 #include "Renderer/ModelManager.h"
+#include "Audio/AudioSystem.h"
 #include "Renderer/Renderer.h"
 #include "GAAAAME.h"
 #include <FrameWork/Emitter.h>
@@ -42,6 +43,7 @@ void Enemy::Update(float dt)
 		m_scene->Add(std::move(weapon));
 		std::cout << "blep";
 
+		Twili::g_noise.AddAudio("Jump", "Jump.wav");
 	}
 
 }
@@ -65,7 +67,7 @@ void Enemy::onCollision(Actor* other)
 			}
 			else if (this->m_tag == "Enemy4")
 			{
-				m_game->AddPoints(300); m_destroyed = true;
+				m_game->AddPoints(500); m_destroyed = true;
 
 				std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, Twili::pi, Twili::Transform{ {400, 300}, 0, 4 }, Twili::g_MM.get("ship.txt"));
 				player->m_tag = "Player";
@@ -73,7 +75,10 @@ void Enemy::onCollision(Actor* other)
 				player->setDamping(0.9f);
 				m_scene->Add(std::move(player));
 			}
-			
+			else if (this->m_tag == "Enemy3")
+			{
+				m_game->AddPoints(5000); m_destroyed = true;
+			}			
 			else 
 			{ 
 				m_game->AddPoints(100); 
@@ -84,11 +89,11 @@ void Enemy::onCollision(Actor* other)
 		Twili::EmitterData data;
 		data.burst = true;
 		data.burstCount = 100;
-		data.spawnRate = 200;
+		data.spawnRate = 0;
 		data.angle = 0;
 		data.angleRange = Twili::pi;
 		data.lifetimeMin = 0.5f;
-		data.lifetimeMin = 1.5f;
+		data.lifetimeMax = 1.5f;
 		data.speedMin = 50;
 		data.speedMax = 250;
 		data.damping = 0.5f;

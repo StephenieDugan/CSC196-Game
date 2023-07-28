@@ -7,30 +7,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GAAAAME.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Weapon.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
+    <ClCompile Include="Enemy.cpp">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="GAAAAME.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="player.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Weapon.h" />
-    <ClInclude Include="GAAAAME.h">
-      <Filter>Source</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

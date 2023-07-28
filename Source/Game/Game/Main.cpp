@@ -86,6 +86,7 @@ int main(int argc, char* argv[]) {
 		Twili::g_noise.Update();
 		Twili::g_ParticleSystem.Update(Twili::g_time.getDeltaTime());
 		
+		
 
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_ESCAPE))
 		{
@@ -125,7 +126,7 @@ int main(int argc, char* argv[]) {
 
 		Twili::g_rend.setColor(0, 0, 0, 0);
 		Twili::g_rend.beginFrame();
-
+		Twili::g_noise.PlayOneShot("MakeItPop", true);
 		//Twili::Vector2 vel(1.0f, 3.0f);
 
 		//text->Draw(Twili::g_rend, 400, 300);

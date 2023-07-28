@@ -12,7 +12,7 @@ public:
 
 	void Update(float dt) override;
 	void onCollision(Actor* actor) override;
-	float m_health = 5.0f;
+	float m_health = 80.0f;
 protected:
 	float m_speed = 0;
 	float m_turnRate = 0;

@@ -39,6 +39,11 @@ private:
 	std::shared_ptr<Twili::Font> font2;
 	std::unique_ptr<Twili::Text> m_Scoretext;
 	std::unique_ptr<Twili::Text> m_Livestext;
+	std::unique_ptr<Twili::Text> m_Level1text;
+	std::unique_ptr<Twili::Text> m_Level2text;
+	std::unique_ptr<Twili::Text> m_Level3text;
+	std::unique_ptr<Twili::Text> m_Level4text;
+	std::unique_ptr<Twili::Text> m_Level5text;
 	std::unique_ptr<Twili::Text> m_Healthtext;
 	std::unique_ptr<Twili::Text> m_Titletext;
 	std::unique_ptr<Twili::Text> m_GOvertext;

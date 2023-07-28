@@ -36,13 +36,32 @@ void Player::Update(float dt)
 			m_scene->Add(std::move(weapon));
 		}
 	}
-
-	if (m_transform.scale == 5 || m_transform.scale == 4)
+	else if (m_transform.scale == 5 || m_transform.scale == 4) //2 weapons
 	{
 		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) && !Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE) && m_tag == "Player")
 		{
 			Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f), 1};
 			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+
+			Twili::Transform transform2{ m_transform.position, m_transform.rotation - Twili::degreesToRadians(10.0f), 1};
+			weapon = std::make_unique<Weapon>(400.0f, transform2, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+		}
+	}
+	else if (m_transform.scale == 7) //3 weapons
+	{
+		if (Twili::g_inputSys.GetKeyDown(SDL_SCANCODE_SPACE) && !Twili::g_inputSys.GetPreviousKeyDown(SDL_SCANCODE_SPACE) && m_tag == "Player")
+		{
+			Twili::Transform transform{ m_transform.position, m_transform.rotation, 1};
+			std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform, m_model);
+			weapon->m_tag = "PlayerFire";
+			m_scene->Add(std::move(weapon));
+
+			Twili::Transform transform1{ m_transform.position, m_transform.rotation + Twili::degreesToRadians(10.0f), 1};
+			weapon = std::make_unique<Weapon>(400.0f, transform1, m_model);
 			weapon->m_tag = "PlayerFire";
 			m_scene->Add(std::move(weapon));
 
@@ -77,8 +96,19 @@ void Player::onCollision(Actor* other)
 
 	if (other->m_tag == "PowerUp")
 	{
-		m_transform.scale = 5;
-		other->m_destroyed = true;
+		if (m_transform.scale == 6)
+		{
+			m_transform.scale -= 1;
+			other->m_destroyed = true;
+		}
+	}
+	if (other->m_tag == "PowerUp2")
+	{
+		if (m_transform.scale == 5)
+		{
+			m_transform.scale += 2;
+			other->m_destroyed = true;
+		}
 	}
 	
 }
